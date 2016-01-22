@@ -1,0 +1,16 @@
+# 8 bit addresses
+# 2 Bytes/word, 2 words/block, 4 block/set, 2 sets/cache
+# 1 cycle/hit, 2 cycles/read, 2 cycles/write
+
+write-req 0 1122
+write-req 8 3344
+write-req 16 5566
+write-req 2 4321
+write-req 24 7788
+write-req 32 9900
+write-req 40 AABB
+read-req 40
+read-req 90
+read-req 2
+debug-req
+flush-req

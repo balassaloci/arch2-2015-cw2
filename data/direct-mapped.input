@@ -11,3 +11,4 @@ read-req 0
 write-req 16 1234
 read-req 0
 read-req 16
+flush-req
