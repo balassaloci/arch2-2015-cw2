@@ -6,8 +6,8 @@ Development
 -----------
 The cache simulator consists of two main parts:
 
-1. The input parser module `mem_sim_parser.cpp`
-2. The memory and cache simulator `mem_sim_cache.cpp`
+  - The input parser module `mem_sim_parser.cpp`
+  - The memory and cache simulator `mem_sim_cache.cpp`
 
 ### The input parser module
 I began by writing the parser module so I could later test
