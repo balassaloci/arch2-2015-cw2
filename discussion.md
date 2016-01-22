@@ -19,22 +19,23 @@ a user friendly error message, which includes the line number and the
 description of the error.
 
 If a line has been successfully parsed, the parser calls the appropriate function
-in the cache simulator. 
+in the cache simulator.
 
 ### The cache simulator
 The cache is implemented using a vector of vectors.
-The cache is a vector of sets and each set is a vector of type cache_block.
+The cache is a vector of sets and each set is a vector of type `cache_block`.
 Each cache_block includes an array of bytes that store the data, a dirty bit and a tag.
 
-To implement the LRU policy, each cache_block is being put at the
+To implement the LRU policy, each `cache_block` is being put at the
 end of the set on every access. When a cache block needs to be removed,
-it is the one with index [0] in the set that's been used least recently. 
+it is the one with index [0] in the set that's been used least recently.
+
+At the start of the program, all sets are empty vectors. 
 
 Testing & Debugging
 -------------------
 I tested the simulator with the given test files as well as with some of my own input files.
 I included some of these.
-Corner cases> ?
 
 The code outputs a constant stream of comments which include what blocks are currently in the
 cache, whether they're dirty or not. There is a separate indication every time a block is being

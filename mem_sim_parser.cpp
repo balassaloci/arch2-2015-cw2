@@ -1,13 +1,6 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <fstream>
-
-#include "mem_sim_cache.cpp"
+#include "mem_sim_parser.h"
 
 using namespace std;
-
-cache c;
 
 void log_error (int line, string message) {
     cout << "ERROR on line " << line << ": " << message << endl;
@@ -62,7 +55,7 @@ int parseInfile() {
                 }
                 
                 log_verbose(linec, "read req, addr: " + to_string(address));
-                c.read(address);
+                ca.read(address);
                 // Trigger read request
                 
             } else if (command == "write-req") {
@@ -93,7 +86,7 @@ int parseInfile() {
                 parsedData = parseData(wordsize, rawdata);                
                 log_verbose(linec, "write req");
                 
-                c.write(address, parsedData);
+                ca.write(address, parsedData);
                 //log_verbose(linec, "read req, addr: " + to_string(address));
                 // Trigger WRITE request
 
@@ -105,7 +98,7 @@ int parseInfile() {
                     //infile.close();
                     return -1;
                 }
-                c.flush_request();
+                ca.flush_request();
                 
                 // cout << "flush-ack 0" << endl;
                 // Trigger flush request
@@ -143,17 +136,17 @@ int parseInfile() {
 
 int runParse() {
     /*
-    c.address_bits = 8;
-    c.bytes_word = 2;     // Power of 2
-    c.words_block = 2;    // Power of 2
-    c.blocks_set = 1;     // Power of 2
-    c.sets_cache = 2;     // Power of 2
-    c.cycles_hit = 1;
-    c.cycles_read = 2;
-    c.cycles_write = 2;
+    ca.address_bits = 8;
+    ca.bytes_word = 2;     // Power of 2
+    ca.words_block = 2;    // Power of 2
+    ca.blocks_set = 1;     // Power of 2
+    ca.sets_cache = 2;     // Power of 2
+    ca.cycles_hit = 1;
+    ca.cycles_read = 2;
+    ca.cycles_write = 2;
     
     */    
-    c.create();
+    ca.create();
       
     parseInfile();
  
