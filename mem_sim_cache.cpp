@@ -18,9 +18,6 @@ unsigned int set_index(unsigned int block_address,
                        unsigned int sets_cache) {
     //block_address /= (2 * 2);
     unsigned int index = block_address % sets_cache;
-    
-    //cout << "SET blk_addr " << block_address << " sets_cache " << sets_cache
-    //        << " is " << index << endl;
              
     return index; 
 }
@@ -29,8 +26,7 @@ unsigned int tag_index(unsigned int sets_cache,
                      unsigned int block_address) {
                          
     unsigned int index = block_address / sets_cache;              
-    //cout << "TAG blk_addr " << block_address << " blks_set " << sets_cache
-    //        << " is " << index << endl;
+    
     return index;
 }
 

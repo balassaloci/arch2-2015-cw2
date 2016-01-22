@@ -62,6 +62,7 @@ public:
     void flush_request();
 };
 
+//Global variable ugh
 extern cache ca;
 
 #endif

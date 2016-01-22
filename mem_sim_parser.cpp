@@ -7,6 +7,7 @@ void log_error (int line, string message) {
 }
 
 void log_verbose (int line, string message) {
+    //This message has been disabled intentionally
     //cout << "# Msg on line " << line << ": " << message << endl;
 }
 
@@ -26,7 +27,6 @@ unsigned char * parseData(int wordsize, string rawdata) {
 }
 
 int parseInfile() {
-    //ifstream infile(inPath.c_str());
     string line;
     int linec = 0;
     int wordsize = 2;
@@ -44,19 +44,16 @@ int parseInfile() {
                 
                 if (! (iss >> address)) {
                     log_error(linec, "invalid usage of read-req, expected: 'read-req address'");
-                    //infile.close();
                     return -1;
                 }
                 
                 if (iss >> spare && spare[0] != '#') {
                     log_error(linec, "invalid usage of read-req, expected: 'read-req address'");
-                    //infile.close();
                     return -1;
                 }
                 
                 log_verbose(linec, "read req, addr: " + to_string(address));
                 ca.read(address);
-                // Trigger read request
                 
             } else if (command == "write-req") {
                 int address;
@@ -67,19 +64,16 @@ int parseInfile() {
                 
                 if (! (iss >> address)) {
                     log_error(linec, "invalid usage of write-req, expected: 'write-req address data'");
-                    //infile.close();
                     return -1;
                 }
                 
                 if (! (iss >> rawdata)) {
                     log_error(linec, "invalid usage of write-req, expected: 'write-req address data'");
-                    //infile.close();
                     return -1;
                 }
                 
                 if (iss >> spare && spare[0] != '#') {
                     log_error(linec, "invalid usage of write-req, expected: 'write-req address data'");
-                    //infile.close();
                     return -1;
                 }
                 
@@ -87,40 +81,33 @@ int parseInfile() {
                 log_verbose(linec, "write req");
                 
                 ca.write(address, parsedData);
-                //log_verbose(linec, "read req, addr: " + to_string(address));
-                // Trigger WRITE request
-
-            
+           
             } else if (command == "flush-req") {
                 string spare = " ";
                 if (iss >> spare && spare[0] != '#') {
                     log_error(linec, "invalid usage of flush-req, expected: 'read-req'");
-                    //infile.close();
                     return -1;
                 }
                 ca.flush_request();
-                
-                // cout << "flush-ack 0" << endl;
-                // Trigger flush request
+
                 log_verbose(linec, "flush req");
                 
             } else if (command == "debug-req") {
                 string spare = " ";
                 if (iss >> spare && spare[0] != '#') {
                     log_error(linec, "invalid usage of flush-req, expected: 'read-req'");
-                    //infile.close();
                     return -1;
                 }
                 
                 // Trigger DEBUG request
                 cout << "debug-ack-begin" << endl
                         << "debug-ack-end" << endl;
+
                 log_verbose(linec, "debug req");
             } else if (command[0] == '#') {
                 log_verbose(linec, "comment line");
             } else {
                 log_error(linec, "INVALID instruction: " + command);
-                //infile.close();
                 return -1;	
             }
             
@@ -130,7 +117,6 @@ int parseInfile() {
 
     }
 
-    //infile.close();
 }
 
 
